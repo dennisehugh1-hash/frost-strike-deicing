@@ -7,9 +7,9 @@
 
 打开页面即自动循环：覆冰累积 → 储能电容充电 → 晶闸管触发 → 电枢带动导线形变 → 应力波破冰。
 
-## 开启 GitHub Pages（只需一次）
+## 前置需开启 GitHub Pages
 
-GitHub 要求仓库主人手动打开 Pages。代码已在 `main` 根目录，按下面三步站点即可访问：
+GitHub 要求手动打开 Pages。代码已在 `main` 根目录，按下面三步即可访问：
 
 1. 打开 [Settings → Pages](https://github.com/dennisehugh1-hash/frost-strike-deicing/settings/pages)
 2. Build and deployment → Source 选 **Deploy from a branch**
@@ -17,9 +17,9 @@ GitHub 要求仓库主人手动打开 Pages。代码已在 `main` 根目录，�
 
 约一分钟后打开 https://dennisehugh1-hash.github.io/frost-strike-deicing/
 
-若页面 404，先确认 GitHub 账号邮箱已验证。
 
-## 操作
+
+## 演示
 
 - 空格：充电 / 触发冲击
 - R：重置档距覆冰
