@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -22,8 +23,49 @@
       <button type="button" data-view="principle">原理</button>
     </nav>
   </header>
-  <link rel="stylesheet" href="style.css" />
-  <div id="app-root"></div>
-  <script src="app.js"></script>
+  <div class="wrap">
+    <div class="stage">
+      <div class="viewport">
+        <canvas id="scene" aria-label="架空线路电磁除冰现场"></canvas>
+        <article class="principle" id="principle" hidden>
+          <p class="sub">电工新技术综合训练 · 专题 1</p>
+          <h2>电磁振动冲击除冰</h2>
+          <p>除冰系统通过自锁紧挂钩将线缆与敲击杆刚性连接。电磁触发驱动运动电枢，敲击杆带动线缆产生瞬态形变，应力波沿导线双向传播，覆冰在高应变下破裂脱落。除冰的关键在于线缆形变程度。</p>
+          <div class="facts">
+            <div class="card"><k>关键机制</k><b>线缆形变幅度</b><span class="sub">形变越显著，冰层脱落越彻底</span></div>
+            <div class="card"><k>驱动形式</k><b>直供电枢线圈</b><span class="sub">对角同向电流，20 匣，间距尽量小</span></div>
+            <div class="card"><k>实测峰值</k><b>5.96 kA / 36 kN</b><span class="sub">1500 V · 4000 μF 储能电容放电</span></div>
+          </div>
+          <div class="card">
+            <k>电磁力</k>
+            <p class="eq">Wm = 1/2 L1 I1^2 + 1/2 L2 I2^2 + M I1 I2</p>
+            <p class="eq">Fx = -dWm/dx = - I1 I2 dM/dx</p>
+          </div>
+        </article>
+      </div>
+      <div class="panel wave" id="wavePanel">
+        <svg id="wave" width="100%" height="110" viewBox="0 0 640 110" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+    <aside>
+      <section class="panel">
+        <h2>试验参数</h2>
+        <div class="field"><label>充电电压</label><div class="seg" id="voltSeg"></div></div>
+        <div class="field"><label>线圈间距</label><div class="seg" id="gapSeg"></div></div>
+        <div class="field"><label>覆冰类型</label><div class="seg" id="iceSeg"></div></div>
+        <button class="cta" id="fireBtn" type="button">开始充电</button>
+        <div class="row">
+          <button class="ghost" id="resetBtn" type="button">重置</button>
+          <button class="ghost" id="autoBtn" type="button">暂停自动</button>
+        </div>
+        <p class="hint">空格充电/触发 · R 重置 · 本页为教学演示</p>
+      </section>
+      <section class="panel">
+        <h2>遥测</h2>
+        <div class="tel" id="tel"></div>
+      </section>
+    </aside>
+  </div>
+<script src="app.js"></script>
 </body>
 </html>
