@@ -30,16 +30,15 @@
         <article class="principle" id="principle" hidden>
           <p class="sub">电工新技术综合训练 · 专题 1</p>
           <h2>电磁振动冲击除冰</h2>
-          <p>除冰系统通过自锁紧挂钩将线缆与敲击杆刚性连接。电磁触发驱动运动电枢，敲击杆带动线缆产生瞬态形变，应力波沿导线双向传播，覆冰在高应变下破裂脱落。除冰的关键在于线缆形变程度。</p>
+          <p>除冰系统通过自锁紧挂钩将线缆与敲击杆刚性连接。电磁触发驱动运动电枢，敲击杆带动线缆产生瞬态形变，应力波沿导线双向传播。</p>
           <div class="facts">
             <div class="card"><k>关键机制</k><b>线缆形变幅度</b><span class="sub">形变越显著，冰层脱落越彻底</span></div>
-            <div class="card"><k>驱动形式</k><b>直供电枢线圈</b><span class="sub">对角同向电流，20 匣，间距尽量小</span></div>
-            <div class="card"><k>实测峰值</k><b>5.96 kA / 36 kN</b><span class="sub">1500 V · 4000 μF 储能电容放电</span></div>
+            <div class="card"><k>驱动形式</k><b>直供电枢线圈</b><span class="sub">对角同向电流，20 匣</span></div>
+            <div class="card"><k>实测峰值</k><b>5.96 kA / 36 kN</b><span class="sub">1500 V · 4000 uF</span></div>
           </div>
           <div class="card">
             <k>电磁力</k>
-            <p class="eq">Wm = 1/2 L1 I1^2 + 1/2 L2 I2^2 + M I1 I2</p>
-            <p class="eq">Fx = -dWm/dx = - I1 I2 dM/dx</p>
+            <p class="eq">Fx = - I1 I2 dM/dx</p>
           </div>
         </article>
       </div>
@@ -58,7 +57,7 @@
           <button class="ghost" id="resetBtn" type="button">重置</button>
           <button class="ghost" id="autoBtn" type="button">暂停自动</button>
         </div>
-        <p class="hint">空格充电/触发 · R 重置 · 本页为教学演示</p>
+        <p class="hint">空格充电/触发 · R 重置</p>
       </section>
       <section class="panel">
         <h2>遥测</h2>
@@ -66,6 +65,9 @@
       </section>
     </aside>
   </div>
-<script src="app.js"></script>
+  <script src="physics.js"></script>
+  <script src="sim.js"></script>
+  <script src="draw.js"></script>
+  <script src="ui.js"></script>
 </body>
 </html>
