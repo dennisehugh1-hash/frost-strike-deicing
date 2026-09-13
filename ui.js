@@ -81,10 +81,9 @@ function setSeg(id, items, value, onPick) {
   };
 }
 function setView(view) {
+  if (view !== "field" && view !== "coil") view = "field";
   S.view = view;
   document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.view === view));
-  document.getElementById("principle").hidden = view !== "principle";
-  canvas.style.display = view === "principle" ? "none" : "block";
 }
 document.getElementById("tabs").onclick = (e) => {
   const b = e.target.closest("button"); if (b) setView(b.dataset.view);
@@ -131,7 +130,7 @@ function loop(now) {
   step(dt);
   const w = canvas.clientWidth, h = canvas.clientHeight;
   if (S.view === "coil") drawCoil(w, h);
-  else if (S.view === "field") drawField(w, h);
+  else drawField(w, h);
   uiAcc += dt;
   if (uiAcc > 0.08) { uiAcc = 0; syncUi(); }
   requestAnimationFrame(loop);
