@@ -3,7 +3,7 @@
 电容放电驱动平面线圈，电枢经挂钩把瞬态形变送入导线，应力波沿线传播，即可使得覆冰在高应变下破裂脱落。
 
 **仓库：** https://github.com/dennisehugh1-hash/frost-strike-deicing  
-**在线演示：** https://dennisehugh1-hash.github.io/frost-strike-deicing/（需前置GITHUB PAGES）
+**在线演示：** https://dennisehugh1-hash.github.io/frost-strike-deicing/  **（需前置GITHUB PAGES）
 
 打开页面即自动循环：覆冰累积 → 储能电容充电 → 晶闸管触发 → 电枢带动导线形变 → 应力波破冰。
 
