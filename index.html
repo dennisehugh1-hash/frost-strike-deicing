@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>霜击 · 架空线路电磁除冰演示</title>
-  <meta name="description" content="依据大连理工大学《电工新技术综合训练》专题 1 的架空线路电磁除冰交互仿真。" />
+  <meta name="description" content="架空线路电磁除冰交互演示：调节电压与线圈间距，观看应力波破冰。" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,30 +17,18 @@
       <p class="brand">霜击</p>
       <p class="sub">架空线路电磁除冰演示</p>
     </div>
-    <nav class="tabs" id="tabs">
-      <button type="button" data-view="field" class="on">现场</button>
-      <button type="button" data-view="coil">线圈</button>
-      <button type="button" data-view="principle">原理</button>
+    <nav class="head-nav">
+      <div class="tabs" id="tabs">
+        <button type="button" data-view="field" class="on">现场</button>
+        <button type="button" data-view="coil">线圈</button>
+      </div>
+      <a class="theory-link" href="#theory">理论推导</a>
     </nav>
   </header>
   <div class="wrap">
     <div class="stage">
       <div class="viewport">
         <canvas id="scene" aria-label="架空线路电磁除冰现场"></canvas>
-        <article class="principle" id="principle" hidden>
-          <p class="sub">电工新技术综合训练 · 专题 1</p>
-          <h2>电磁振动冲击除冰</h2>
-          <p>除冰系统通过自锁紧挂钩将线缆与敲击杆刚性连接。电磁触发驱动运动电枢，敲击杆带动线缆产生瞬态形变，应力波沿导线双向传播。</p>
-          <div class="facts">
-            <div class="card"><k>关键机制</k><b>线缆形变幅度</b><span class="sub">形变越显著，冰层脱落越彻底</span></div>
-            <div class="card"><k>驱动形式</k><b>直供电枢线圈</b><span class="sub">对角同向电流，20 匝</span></div>
-            <div class="card"><k>实测峰值</k><b>5.96 kA / 36 kN</b><span class="sub">1500 V · 4000 µF</span></div>
-          </div>
-          <div class="card">
-            <k>电磁力</k>
-            <p class="eq">Fx = - I1 I2 dM/dx</p>
-          </div>
-        </article>
       </div>
       <div class="panel wave" id="wavePanel">
         <svg id="wave" width="100%" height="110" viewBox="0 0 640 110" preserveAspectRatio="none"></svg>
@@ -57,7 +45,7 @@
           <button class="ghost" id="resetBtn" type="button">重置</button>
           <button class="ghost" id="autoBtn" type="button">暂停自动</button>
         </div>
-        <p class="hint">空格充电/触发 · R 重置</p>
+        <p class="hint">空格充电/触发，R 重置。电压越高、气隙越小，近点脱冰越彻底。</p>
       </section>
       <section class="panel">
         <h2>遥测</h2>
@@ -65,6 +53,71 @@
       </section>
     </aside>
   </div>
+  <article class="principle" id="theory">
+    <p class="sub">附录</p>
+    <h2>理论推导</h2>
+    <p>装置把储能电容的电能转成瞬态冲击，再经导线把形变波送到覆冰层。下面从磁能出发，依次得到轴向力、放电电流、应力波与脱冰判据。上方动画按同一组关系实时演算。</p>
+
+    <h3>1. 耦合线圈的磁能</h3>
+    <p>驱动线圈与运动电枢可看成一对平面线圈。忽略铁心饱和时，系统磁能为自感项与互感项之和：</p>
+    <p class="eq">Wₘ = ½ L₁ I₁² + ½ L₂ I₂² + M(x) I₁ I₂</p>
+    <p>L₁、L₂ 随轴向位移 x 变化很弱，互感 M(x) 随气隙增大迅速下降。对角同向通电时互感取最大，气隙越小则梯度越大。</p>
+
+    <h3>2. 虚功原理 → 轴向力</h3>
+    <p>电流瞬时不变时，广义力等于磁能对广义坐标的偏导。沿轴向取虚位移：</p>
+    <p class="eq">Fₓ = −∂Wₘ/∂x = − I₁ I₂ ∂M/∂x</p>
+    <p>互感随气隙增大而减小（∂M/∂x 为负），故 Fₓ 把电枢推向导线。线圈 20 匪、层间距尽量小，同时抬高电流与 |∂M/∂x|。气隙缩放取 (4/δ)⁰·⁵⁵。</p>
+
+    <h3>3. 电容放电电流</h3>
+    <p>储能电容 C = 4000 μF 经晶闸管对线圈放电，回路近似欠阻尼 RLC：</p>
+    <p class="eq">i(t) = (V / ωL) e⁻ᵃᵗ sin(ω t)， ω = √(1/LC − α²)</p>
+    <p>1500 V 时峰值约 5.96 kA，对应冲击力约 36 kN（4 mm 气隙）。力脉冲相对电流有约 2 ms 机械延迟。</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>充电电压</th><th>峰值电流</th><th>峰值冲击力</th><th>近点位移（4 mm）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>500 V</td><td>2.21 kA</td><td>4.65 kN</td><td>≈ 2.4 cm</td></tr>
+          <tr><td>1000 V</td><td>4.37 kA</td><td>16.1 kN</td><td>≈ 4.4 cm</td></tr>
+          <tr><td>1500 V</td><td>5.96 kA</td><td>36.0 kN</td><td>≈ 6.9 cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4. 导线应力波</h3>
+    <p>敲击杆与导线刚性锁止，电枢位移瞬时变成导线局部挠度。张力 T、线密度 μ 的档距上，横向扰动以波速</p>
+    <p class="eq">c = √(T/μ)</p>
+    <p>向两侧传播。形变幅度随距离衰减，脱冰首先发生在敲击点附近。电压可补偿气隙：12 mm 间距时可把充电电压从 500 V 提到 1500 V，以恢复近点位移。</p>
+
+    <h3>5. 覆冰破坏判据</h3>
+    <div class="facts">
+      <div class="card">
+        <k>应变准则</k>
+        <p class="eq">εₚ ≥ εₚmax</p>
+        <p>积分点塑性应变超过冰的允许上限时，冰层裂成碎片。</p>
+      </div>
+      <div class="card">
+        <k>冰套分离</k>
+        <p class="eq">Fᵥ + G ≥ Fₐ + F_c</p>
+        <p>惯性力与重力之和超过黏附力与内聚力时脱落。短时程高幅值载荷更有效。</p>
+      </div>
+      <div class="card">
+        <k>近点破裂</k>
+        <p class="eq">1500 V · 4 mm · 雨淞 ≈ 90%</p>
+        <p>雨淞最硬（密度 900–920 kg/m³）。硬雾淞、软雾淞阈值更低，同等冲击下脱落更彻底。</p>
+      </div>
+    </div>
+
+    <h3>6. 从公式到画面</h3>
+    <ol>
+      <li>选电压、气隙、覆冰 → 得到 Iₚ、Fₚ 与敲击点位移。</li>
+      <li>电容充电至目标电压后晶闸管导通，电流按 RLC 振荡。</li>
+      <li>电枢在 Fₓ 下加速，挂钩把冲击传入导线。</li>
+      <li>应力波沿线传播，超过阈值的冰段开裂并坠落。</li>
+    </ol>
+  </article>
+  <footer>霜击 · 架空线路电磁除冰演示。本页为原理演示，非现场作业规程。</footer>
   <script src="physics.js"></script>
   <script src="sim.js"></script>
   <script src="draw.js"></script>
