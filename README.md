@@ -1,7 +1,6 @@
-# 霜击 · 架空线路电磁除冰演示
+#  架空线路电磁除冰演示
 
-依据大连理工大学《电工新技术综合训练》2026 春专题 1
-《架空线路电磁除冰装置设计与实现》（王进君）做的交互仿真。
+
 
 **仓库：** https://github.com/dennisehugh1-hash/frost-strike-deicing  
 **在线演示：** https://dennisehugh1-hash.github.io/frost-strike-deicing/
